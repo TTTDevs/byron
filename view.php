@@ -9,14 +9,21 @@
 
 <body>
   <div id="wrap-content">
+    <div class="header">
+      <a href="/">Main page</a>
+    </div>
+    
+    <hr>
     
     <div id="content">
       <?php  echo $content; ?>
     </div>
 
+    <hr>
+
     <div id="menu-bar">
+      <p>Entries</p>
       <nav>
-      <a href="/">Página principal</a><br>
         <?php echo implode("\n", $menu); ?>
       </nav>
     </div>

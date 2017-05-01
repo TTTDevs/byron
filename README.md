@@ -1,7 +1,7 @@
 Hello!
 ===
 
-Byron is a minimalistic blogging platform.
+Byron is a minimalistic blogging platform. Thought to be used mainly as a log; it will not add a title to the documents, but list them by their last modification (unix/linux) or creation (windows) date.
 
 Installing
 ---
