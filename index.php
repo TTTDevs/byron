@@ -25,10 +25,12 @@
 // include  the library markdown parsing
 include('libs/parsedown/Parsedown.php');
 
-if ($_SERVER['PATH_INFO']) {
-  $post = array_pop(explode("/", $_SERVER['PATH_INFO']));
-  $post_path = "posts/$post.md";
-}
+// split request uri and discard arguments. we need the path only.
+$request = explode( '?', $_SERVER['REQUEST_URI'])[0];
+
+// convert path to filename
+$post = array_pop(explode("/", $request));
+$post_path = "posts/$post.md";
 
 // creamos el menu
 $menu=[];
@@ -41,7 +43,7 @@ foreach (glob("posts/*.md") as $coso) {
 // create 
 $pd = new Parsedown();
 
-if (isset($post_path)) {
+if (file_exists($post_path)) {
   // render the post content
   $content = $pd->text(file_get_contents($post_path));
 } else {
