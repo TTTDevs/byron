@@ -3,6 +3,16 @@ Hello!
 
 Byron is a minimalistic blogging platform.
 
+Installing
+---
+
+After cloning the repository make sure to update the dependencies by running the following command:
+
+```
+git submodule update --init
+```
+
+
 Byron can be started two ways...
 
 Nginx
