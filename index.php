@@ -37,8 +37,9 @@ $menu=[];
 foreach (glob("posts/*.md") as $coso) {
   $filename = basename($coso, '.md');
   $name = date ("F d Y H:i", filemtime($coso));
-  array_push($menu, "<a href='/$filename'>$name</a><br>");
+  array_push($menu, "<li><a href='/$filename'>$name</a></li>");
 }
+$menu_count=count($menu);
 
 // create 
 $pd = new Parsedown();
