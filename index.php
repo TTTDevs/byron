@@ -27,31 +27,31 @@ include('libs/parsedown/Parsedown.php');
 
 // split request uri and discard arguments. we need the path only.
 $request = explode( '?', $_SERVER['REQUEST_URI'])[0];
-
-// convert path to filename
-$post = array_pop(explode("/", $request));
-$post_path = "posts/$post.md";
-
-// creamos el menu
-$menu=[];
-foreach (glob("posts/*.md") as $coso) {
-  $filename = basename($coso, '.md');
-  $name = date ("F d Y H:i", filemtime($coso));
-  array_push($menu, "<li><a href='/$filename'>$name</a></li>");
-}
-$menu_count=count($menu);
-
-// create 
 $pd = new Parsedown();
 
-if (file_exists($post_path)) {
-  // render the post content
-  $content = $pd->text(file_get_contents($post_path));
+if ($request == '/') {
+  // creamos el menu
+  $menu=[];
+  foreach (glob("posts/*.md") as $coso) {
+    $filename = basename($coso, '.md');
+    $name = date ("F d Y H:i", filemtime($coso));
+    array_push($menu, "<li><a href='/$filename' onclick='loadEntry()'>$name</a></li>");
+  }
+  $menu_count=count($menu);
+  
+  // render the content inside the view
+  require_once("view.php");
 } else {
-  // render landing page
-  $content = $pd->text(file_get_contents('welcome.md'));
-}
+  // convert path to filename
+  $post = array_pop(explode("/", $request));
+  $post_path = "posts/$post.md";
 
-// render the content inside the view
-require_once("view.php");
+  // create 
+  if (file_exists($post_path)) {
+    // render the post content
+    echo $pd->text(file_get_contents($post_path));
+  } else {
+    echo "<h1>Four Oh Four!! No such File</h1>";
+  }
+}
 ?>
